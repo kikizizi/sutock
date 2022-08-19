@@ -1,0 +1,19 @@
+version: '2.3'
+
+services:
+  sutock:
+    build: .
+    environment:
+      - TZ=Asia/Seoul
+    
+    ports:
+      - 8098:8098
+    
+    # user: $UID:$GID
+
+    volumes:
+      - ./sutock:/opt/sutock
+      - /home/du9172/.vscode-server/extensions/:/root/.vscode-server/extensions/
+    tty: true
+
+    command: /bin/bash
