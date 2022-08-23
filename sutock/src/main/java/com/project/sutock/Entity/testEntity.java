@@ -12,7 +12,7 @@ import lombok.Data;
 public class testEntity {
   
   @Id
-  private Long num;
+  private Long id;
 
   @Column(name = "text")
   private String text;
