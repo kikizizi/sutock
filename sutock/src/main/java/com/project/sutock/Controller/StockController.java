@@ -39,5 +39,5 @@ public class StockController {
     stockDto dto=new Gson().fromJson( jsonObject,stockDto.class);
     return stockRepo.save(dto.toEntitiy());
   }
-
+  
 }
