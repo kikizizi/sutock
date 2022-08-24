@@ -1,49 +1,43 @@
 package com.project.sutock.Controller;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+import com.project.sutock.Dto.stockDto;
+import com.project.sutock.Entity.stockEntity;
+import com.project.sutock.Repository.stockRepository;
+
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/stock")
+@RequiredArgsConstructor
 public class StockController {
-  // @Autowired
-   
- 
+  
+  private final stockRepository stockRepo;
+  
   @GetMapping("") 
-  public String getAllList(){
-    return "all_data";
+  public List<stockEntity> getStockList(@RequestParam String date){
+    return stockRepo.findByTradeDate(date);
   }
 
-  @GetMapping("/{code}")
-  public String getOneData(@PathVariable("code") int code){
-    return "get data("+code+")";
+  @GetMapping("/{ticker}")
+  public List<stockEntity> getStockDetail(@PathVariable("ticker") String ticker){
+    return stockRepo.findByTicker(ticker);
   }
 
   @PostMapping("")
-  public String createData(@RequestParam(required = true) int code){
-    return "data("+code+") created";
+  public stockEntity insertData(@RequestParam String jsonObject){
+    System.out.println(jsonObject);
+    stockDto dto=new Gson().fromJson( jsonObject,stockDto.class);
+    return stockRepo.save(dto.toEntitiy());
   }
 
-  @PutMapping("/{code}")
-  public String changePut(@PathVariable("code") int code){
-    return "data("+code+") changed (put)";
-  }
-
-  @PatchMapping("/{code}")
-  public String changePatch(@PathVariable("code") int code){
-    return "data("+code+") changed (patch)";
-  }
-
-  @DeleteMapping("/{code}")
-  public String delData(@PathVariable("code") int code){
-    return "data("+code+") deleted";
-  }
 }
