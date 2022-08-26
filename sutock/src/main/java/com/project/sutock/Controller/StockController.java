@@ -25,12 +25,12 @@ public class StockController {
   
   @GetMapping("") 
   public List<stockEntity> getStockList(@RequestParam String date){
-    return stockRepo.findByTradeDate(date);
+    return stockRepo.findByTradeDateOrderByMarketCapDesc(date);
   }
 
   @GetMapping("/{ticker}")
   public List<stockEntity> getStockDetail(@PathVariable("ticker") String ticker){
-    return stockRepo.findByTicker(ticker);
+    return stockRepo.findByTickerOrderByTradeDateDesc(ticker);
   }
 
   @PostMapping("")

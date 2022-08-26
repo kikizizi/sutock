@@ -28,6 +28,8 @@ public class stockEntity {
 
   private String ticker;
 
+  private String corporateName;
+
   private String tradeDate;
 
   private Integer open;
@@ -43,4 +45,5 @@ public class stockEntity {
   private Long tradeVolume;  
 
   private Long marketCap;
+
 }

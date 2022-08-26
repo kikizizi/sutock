@@ -27,6 +27,8 @@ public class stockDto {
 
   private Long marketCap;
 
+  private String corporateName;
+
   public stockEntity toEntitiy(){
     stockEntity entity = new stockEntity();
     entity.setClose(close);
@@ -38,6 +40,7 @@ public class stockDto {
     entity.setTradeDate(tradeDate);
     entity.setTradeVolume(tradeVolume);
     entity.setVolume(volume);
+    entity.setCorporateName(corporateName);
     return entity;  
   }
 }
